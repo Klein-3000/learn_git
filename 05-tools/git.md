@@ -49,6 +49,10 @@ git diff [HEAD]
 ```bash
 # 显示分支预览表
 git branch
+# 修改主分支名
+git branch -m main
+# 创建分支，但不进入
+git branch -b <新分支> <原分支(默认为"master"或"main")>
 
 # 创建并进入分支
 git checkout -b <branch-name>
@@ -134,7 +138,7 @@ git push -u origin master:main
 git ls-files --eol | grep -i "crlf"
 ```
 
-# 单词
+# 英文单词
 1. master 主
 2. branch 分支
 3. checkout 结账

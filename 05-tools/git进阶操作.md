@@ -1,4 +1,18 @@
 ## ==[[git#推送到github上 | 推送到github上]]==
+
+## git的alias
+```bash
+# 配置 git gl --> git config --global --list
+git config --global alias.gl "config --global --list"
+
+# 取消alias
+git config --global --unset alias.gl
+
+# 查看所用alias
+# regexp 正则表达式
+git config --get-regexp alias
+
+```
 ## 无法正常显示中文
 ```bash
 git config [ --global ] core.quotepath off
@@ -131,13 +145,18 @@ git pull origin main
 
 ---
 # 四、恢复与重置
-## 恢复文件
+## 恢复文件（被staged了才能就回来）
 ```bash
-# 未commit的
+# 删除的
+## 未commit
 git restore -- <file_or_dir>
 
-# commit过的
+##  commit过的
 git checkout -- <file_or_dir>
+
+
+# 单个文件回退(回退版本的hash值)
+git restore --source=<hash> <file_name>
 ```
 ## 重置版本(谨慎操作)
 ```bash
@@ -151,7 +170,7 @@ git reset [ --mixed ] <hash>
 | --hard (硬)     | 0；0                     |
 
 ---
-# 查看差异
+# 查看差异以及是谁写的
 
 | 命diff令                                                                       | 作用                                        |
 | ---------------------------------------------------------------------------- | ----------------------------------------- |
@@ -163,7 +182,16 @@ git reset [ --mixed ] <hash>
 | git diff <commit_hash1> <commit_hash2><br>git diff HEAD~ HEAD    (上个版本与这个版本) |                                           |
 | ==分支之间==                                                                     |                                           |
 | git diff \<branch1> \<branch2>                                               |                                           |
+## blame
+```bash
+git blame <file>
 
+# output resultPS D:\0repository\linux> git blame .\05-tools\git.md
+# hash   author              date       time              content
+^32c8bab (Klein-3000        2025-08-12 22:40:08 +0800   1) # 基础
+^32c8bab (Klein-3000        2025-08-12 22:40:08 +0800   2) ## 基本配置
+
+```
 ---
 # 五、git rm 与直接删除的区别
 
@@ -183,3 +211,8 @@ git reset [ --mixed ] <hash>
 ![[gitignore1.png]]
 ## 可以去github中找(不行就ai)
 [github/gitignore: A collection of useful .gitignore templates](https://github.com/github/gitignore)
+## 相关命令
+```bash
+# 检查文件是否被忽略
+git check-ignore -v <Files>
+```
