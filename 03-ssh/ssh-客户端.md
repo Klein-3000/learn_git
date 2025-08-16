@@ -14,7 +14,10 @@
 Host <myserver>
 	HostName <IP>
 	User <username>
-	IdentityFile /path/to/prvate/key
+	Port <port>
+	# 建议配置
+	# 有添加到ssh-add时，却不指定，ssh会逐个尝试
+	IdentityFile /path/to/private/key
 ```
 # ssh (secure shell)
 ```shell
@@ -47,6 +50,8 @@ ssh-keygen
 -y：show public key
 
 -C：comment：评论 ：非必须，有默认格式，有则便于管理
+
+-R: remove : 删除known_hosts中的"指纹"
 ```
 > [!note] 加密类型
 > rsa：基于RSA算法，默认长度为3072位。
@@ -76,6 +81,23 @@ ssh-keygen -p -P "old_passwd" -N "new_passwd" -f  ~/.ssh/private_key
 
 # cancel password
 ssh-keygen -p -P "old_passwd" -N "" -f  ~/.ssh/private_key
+```
+### ssh warning
+#### matter(问题,麻烦)
+```bash
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+@ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY! 
+Someone could be eavesdropping on you right now (man-in-the-middle attack)! It is also possible that a host key has just been changed. 
+The fingerprint for the ED25519 key sent by the remote host is SHA256:TWKLhVUibTjHhKUEUXbcxN4dJv9ZbEwRK12szqyUdUA.
+Please contact your system administrator. Add correct host key in /c/Users/Lenovo/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in /c/Users/Lenovo/.ssh/known_hosts:49 Host key for github.com has changed and you have requested strict checking. Host key verification failed.
+fatal: Could not read from remote repository. Please make sure you have the correct access rights and the repository exists.
+```
+#### solution(解决方案)
+```bash
+# 就是配置在config中对应的'HostName'
+ssh-keygen -R <HostName>
 ```
 > [!note] 参数解析
 > -p : 修改密码

@@ -13,6 +13,7 @@
 | ----- | ------------- |
 | grep  | select-string |
 | wc -l | ().Count      |
+| cat   | cat ，type     |
 
 # select-string（grep）
 ```
@@ -62,4 +63,15 @@ ls | Sort-Object LastWriteTime -Descending
 
 # 按大小排序（从大到小）
 ls | Sort-Object Length -Descending
+```
+# cat
+```cmd
+# 展示全部
+cat <file>
+
+# 前几行
+cat -haed <file>
+
+# 后几行
+cat -tail <file>
 ```

@@ -1,3 +1,6 @@
+# ssh的config配置
+![[ssh-客户端#配置#简化登录]]
+
 # 相关命令
 ## 认证相关
 1. [[ssh-客户端#ssh (secure shell)| ssh命令]]
