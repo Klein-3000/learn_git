@@ -8,6 +8,9 @@
 ├── known_hosts
 └── known_hosts.old
 ```
+> [!summary] 权限问题
+> .ssh 700
+> 私钥 600
 ## 简化登录
 配置文件 : .ssh/config
 ```shell

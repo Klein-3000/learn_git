@@ -9,9 +9,15 @@
 - -i "info" \<file> : 忽略大小写                          ignore : 忽略
 
 # technique
-```shell
-# 就不会显示grep本身
+## 就不会显示grep本身
+```bash
 ps -ef | grep [s]mb
+```
+## 查看简洁的配置
+```bash
+# -E : 拓展正则
+# -v : 取反
+grep -Ev "#|^$" <ConfigFile>
 ```
 
 # ripgrep

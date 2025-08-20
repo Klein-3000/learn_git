@@ -51,10 +51,10 @@ git show HEAD:<file_name>
 ### 间接查看图片
 git show HEAD:<image.png> > <image.png>
 ```
-## 1
+## 1 克隆
 ### 格式
 ```bash
-git clone --no-checkout <repository-url> 
+git clone --sparse --filter=blob:none <repository-url> 
 cd <repository-directory>
 ```
 ### 案例
@@ -249,4 +249,8 @@ git commit --amend [ -m <commit> ]
 
 # 修改作者
 git commit --amend --author="<name> <email>"
+
+# 将文件添加到先前的提交
+git commit --amend --no-edit
+git push --force-with-lease origin master
 ```

@@ -44,3 +44,14 @@ sed 's/^/&#/'  filename [-i]
 # 行尾添加内容
 sed 's/$/&#/'  filename [-i]
 ```
+### 换行符(回车)问题
+```shell
+sed 's/\r$//' filename
+```
+换行符
+- \n (newline): huanhang
+- \r (return) : 回车
+
+| windows | linux; macos |
+| ------- | ------------ |
+| \n\r    | \n           |

@@ -1,10 +1,3 @@
-
-| 命令         | 作用     |
-| ---------- | ------ |
-| hydra      | 暴力破解密码 |
-| nmap       |        |
-| metasploit |        |
-
 # linux note contribute graph
 ```contributionGraph
 title: Contributions

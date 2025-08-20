@@ -9,11 +9,12 @@
 
 ## 命令
 
-| bash  | powershell    |
-| ----- | ------------- |
-| grep  | select-string |
-| wc -l | ().Count      |
-| cat   | cat ，type     |
+| bash     | powershell             |
+| -------- | ---------------------- |
+| grep     | select-string, findstr |
+| wc -l    | ().Count               |
+| cat      | cat ，type              |
+| ln,touch | new-item               |
 
 # select-string（grep）
 ```
@@ -75,3 +76,27 @@ cat -haed <file>
 # 后几行
 cat -tail <file>
 ```
+# ln和new-item(从左往右看 ln--->origin)
+箭头射中==目标(target)==
+## ln
+```bash
+# 默认为硬链接
+ln [ -s ] <full/path/old,link> <full/path/new,target>
+```
+## new-itme
+```powershell
+# SymboLiclink 符号链接
+New-Item -ItemType SymbolicLink  -Target <Target> -Path <Link>
+# HardLink 硬链接
+New-Item -ItemType HardLink  -Target <Target> -Path <Link>
+```
+## 📌 硬链接 vs 符号链接 对比
+
+|特性|硬链接 (Hard Link)|符号链接 (Symbolic Link)|
+|---|---|---|
+|跨盘符|❌ 不支持|✅ 支持|
+|链接目录|❌ 不支持|✅ 支持 (`/D`)|
+|`ls` 显示|普通文件（无 `l`）|有 `l` 标志|
+|目标删除后|仍可访问（数据保留）|变成“悬空链接”|
+|占用空间|不额外占用|不额外占用|
+|文件系统限制|仅 NTFS|仅 NTFS|
