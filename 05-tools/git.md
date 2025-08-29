@@ -1,3 +1,8 @@
+---
+tags:
+  - tools
+Type: learn
+---
 # 基础
 ## 基本配置
 ```bash

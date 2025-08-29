@@ -1,3 +1,7 @@
+---
+tags:
+  - tools
+---
 ## ==[[git#推送到github上 | 推送到github上]]==
 
 ## git的alias
@@ -125,6 +129,7 @@ git sparse-checkout add "碧蓝航线 Azue Lane/Azue Lane(JP)/aijier_4"
 # 二、浅克隆(shallow clone )
 ![[git.png]]
 
+---
 # 三、更新仓库
 ```bash
 # 默认从名为"origin"的远程仓库获取
@@ -216,6 +221,8 @@ git blame <file>
 # 检查文件是否被忽略
 git check-ignore -v <Files>
 ```
+
+---
 # 七、贮藏区(git stash)
 将==暂存区==内==容贮==藏来
 ```bash
@@ -242,6 +249,8 @@ git stash clear
 git stash show -p
 ```
 [git stash暂存，再也不怕老板让临时改 bug 啦_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1oX4y1E7WQ/?spm_id_from=333.337.search-card.all.click&vd_source=7cf858504e86c3660b73a6ea8f54d272)
+
+---
 # 八、修改提交记录
 ```bash
 # 修改上一个提交(建议不使用参数)

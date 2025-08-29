@@ -1,3 +1,8 @@
+---
+tags:
+  - tools
+Type: configure
+---
 # 配置（windows版）
 ```bash
 # 加速clone,pull (push时,记得注释掉)
