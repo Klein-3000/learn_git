@@ -227,28 +227,33 @@ git check-ignore -v <Files>
 将==暂存区==内==容贮==藏来
 ```bash
 # 添加贮藏
-git stash
+# 默认stash所有文件
+git stash [ push -- <file> ]
 
 # 贮藏列表
-git stash list
+git stash [list]{堆,后来者**居上**, n=0的一直指向**最新**的stash}
 
 # 弹出并删除贮藏
-git stash pop
+git stash pop [ 'stash@{n}' ]
 
 # 弹出但不删除
 # 默认恢复最近的
-git stash apply [ 'stash@{1}' ]
+git stash apply [ 'stash@{n}' ]
 
 # 删除贮藏
 # 默认删除最近的
-git stash drop [ 'stash@{1}' ]
+git stash drop [ 'stash@{n}' ]
 # 清空贮藏
 git stash clear
 
 # 查看贮藏的内容
-git stash show -p
+# show -p 默认只看stash@0}，既最新的stash，不是全部
+git stash show -p [ 'stash@{n}' ]
 ```
 [git stash暂存，再也不怕老板让临时改 bug 啦_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1oX4y1E7WQ/?spm_id_from=333.337.search-card.all.click&vd_source=7cf858504e86c3660b73a6ea8f54d272)
+> [!attention] 注意
+> `stash@{n}` 不一定必须要加引号。
+> 在pwsh中`@{}`有特殊的用法,所以才必须加引号。
 
 ---
 # 八、修改提交记录

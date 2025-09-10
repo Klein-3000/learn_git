@@ -9,6 +9,11 @@
 - 官网
 	- https://hub.docker.com
 	- https://docker.fxxk.dedyn.io
+- 加速镜像
+  - docker.1ms.run
+  - 对search和pull子命令才有用
+    - docker search docker.1ms.run/mysql
+    - docker pull docker.1ms.run/mysql
 ![[docker1.png]]
 ![[docker2.png]]
 # 2.相关目录

@@ -1,6 +1,7 @@
 # 安装
 官网网址 : [Installation | Yazi](https://yazi-rs.github.io/docs/installation)
 学习网站 : https://quickref.cn/docs/yazi.html
+github ： https://github.com/sxyazi/yazi/
 
 
 ## 依赖

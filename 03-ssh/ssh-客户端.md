@@ -120,14 +120,14 @@ ssh-copy-id -i /path/to/public/key  username@remote_host
 # ssh-agent
 ## summary
 
-| 命令                         | 含义             |
-| -------------------------- | -------------- |
-| `eval $(ssh-agent)`        | 启动 `ssh-agent` |
-| `ssh-add ~/.ssh/id_rsa`    | 添加私钥           |
-| `ssh-add -l`               | 列出已加载的私钥       |
-| `ssh-add -D`               | 删除所有已加载的私钥     |
-| `ssh-add -d ~/.ssh/id_rsa` | 删除指定的私钥        |
-| `ssh-add -L`            | 显示所有公钥         |
+| 命令                         | 含义                     |
+| -------------------------- | ---------------------- |
+| `eval $(ssh-agent)`        | 启动 `ssh-agent`,操作对象时私钥 |
+| `ssh-add ~/.ssh/id_rsa`    | 添加私钥                   |
+| `ssh-add -l`               | 列出已加载的**公钥的指纹**        |
+| `ssh-add -D`               | 删除所有已加载的**私钥**         |
+| `ssh-add -d ~/.ssh/id_rsa` | 删除指定已加载的**私钥**         |
+| `ssh-add -L`               | 显示所有公钥                 |
 ## environment variable
  $SSH_AUTH_SOCK 
  $SSH_AGENT_PID

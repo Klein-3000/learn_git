@@ -1,3 +1,60 @@
+# 配置环境变量指定neovim的数据和配置路径
+```powershell
+XDG_CONFIG_HOME : 配置(~/.config/nvim)
+
+XDG_DATA_HOME  : [数据]{插件}(~/.local/share/nvim)
+
+XDG_CACHE_HOME : 缓存(~/.cache )
+```
+## 配置案例(pwsh)
+```powershell
+E:\tools\
+    ├── fastfetch
+    ├── Git
+    ├── nvim <--nvim本体
+    └── nvim-config
+
+#环境变量配置
+## cmd
+set XDG_CONFIG_HOME=E:\tools\nvim-config
+set XDG_DATA_HOME=E:\tools\nvim-config
+set XDG_CACHE_HOME=E:\tools\nvim-config\cache
+
+## pwsh
+$env:XDG_CONFIG_HOME = "E:\tools\nvim-config"
+$env:XDG_DATA_HOME   = "E:\tools\nvim-config"
+$env:XDG_CACHE_HOME  = "E:\tools\nvim-config\cache"
+
+```
+## 验证配置是否生效
+```
+:lua print(vim.fn.stdpath('config'))
+:lua print(vim.fn.stdpath('data'))
+:lua print(vim.fn.stdpath('cache'))
+```
+
+# 配置目录
+## linux
+```shell
+~/.config
+└───nvim
+	├───[init.lua]{主要配置文件,通过`require("config.<fileName>")`调用,就会**加载**lua/config/目录中`.lua`文件的**配置**}
+	├───[lazy-lock.json]{lazy管理插件的**版本**}
+    └───lua
+        ├───[config]{一般配置 "keymap.lua","options.lua","lazy.lua"等文件}
+        └───[plugins]{存放,通过lazy安装插件的**配置**}
+        
+# 插件本体的安装目录
+~/.local/share/nvim/lazy
+
+```
+## windows
+```shell
+[C:\User\<UserName>\AppData\local]{资源管理中输入 %LOCALAPPDATA%}
+├───[nvim]{与linux的"nvim"目录一致}
+└───[nvim-Data\lazy]{插件本体的安装目录}
+ 
+```
 # 插件总结
 
 | 插件                                                                              | 作用                                                                              |
