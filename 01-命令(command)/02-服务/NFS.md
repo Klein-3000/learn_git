@@ -4,22 +4,7 @@
 textparm
 ```
 ## 编辑认证用户(pdbedit)
-```
-pdbedit
-
-# add 创建samba用户
--a user_name
-
-# delete 删除samba用户
--x user_name
-
-# list 列出用户列表
--L
-
-# verbose 列出用户详细信息的列表
--Lv
-
-```
+![[pdbedit]]
 %%
 
 ```

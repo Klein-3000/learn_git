@@ -22,14 +22,19 @@ arp -s 192.168.94.148 11-22-33-44-55-66
 ```shell
 # 基本操作
 ## IP地址
-ip [ --brief ] a[ddress]
+ip [ -b | --brief ] a[ddress]
 ## Mac地址
-ip [ --brief ] l[ink]
+ip [ -b | --brief ] l[ink]
 ## 网关
-ip [ --brief ] r[oute]
+ip [ -b | --brief ] r[oute]
+## 显示邻居表
+ip [ -b | --brief ] n[eighbour]
+
 
 # 临时配置(添加,删除)IP地址
-ip address add <addr/mask> dev [\<device>]{就是网卡}
+ip a[ddress]{} add|delete <addr/mask> dev [\<device>]{就是网卡}
+# 临时配置(添加,删除)网关
+ip r[oute] a[dd] default via <gateway> dev <device>
  
 ```
 

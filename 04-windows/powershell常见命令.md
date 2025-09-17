@@ -4,9 +4,6 @@
 | bash    | powershell |
 | ------- | ---------- |
 | ~/.bash | $profile   |
-
-
-
 ## 命令
 
 | bash     | powershell             |
@@ -15,6 +12,26 @@
 | wc -l    | ().Count               |
 | cat      | cat ，type              |
 | ln,touch | new-item               |
+# smb服务相关的
+## cmd
+![[cmd#smb服务]]
+## pwsh
+```shell
+# 建立链接
+## 一次性链接(不推荐)
+
+## 长时间链接
+new-sambapping [ -LocalPath ] "盘符" [ -RemotePath ] "\\server_addr[@port]\share_dir" credential $cred
+
+# 断开链接
+remove-sambapping [ -LocalPath ] "盘符" [ -Force ]
+
+# 查看链接
+get-sambapping
+ 
+```
+> [!attention] 注意
+> 1. 盘符后面要加"==:=="
 
 # select-string（grep）
 ```

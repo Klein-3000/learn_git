@@ -11,16 +11,33 @@
 > [!summary] 权限问题
 > .ssh 700
 > 私钥 600
-## 简化登录
+## 简化登录(使用指定配置--ssh & git)
 配置文件 : .ssh/config
+### 配置
 ```shell
 Host <myserver>
 	HostName <IP>
 	User <username>
 	Port <port>
 	# 建议配置
-	# 有添加到ssh-add时，却不指定，ssh会逐个尝试
-	IdentityFile /path/to/private/key
+    # 有添加到ssh-add时，却不指定，ssh会逐个尝试
+    IdentityFile /path/to/private/key
+    # 自定义knwon_hosts 文件的路径
+    UserKnwonHostsFile /path/to/knownHosts
+    # 只使用[指定]{**IdentityFile**指定,或**ssh-add-L**列出的},忽略[标准私钥]{~/.ssh/id_rsa,~/.ssh/id_ecdsa}
+    IdentitiesOnly yes
+```
+### 命令
+```shell
+# ssh
+ssh -F /path/to/config <myserver> 
+
+# git
+git -c core.sshCommand="ssh -F /path/to/config/" clone git@github.com:User/repository
+## 使用环境变量GIT_SSH_COMMAND
+export GIT_SSH_COMMAND="ssh -F /path/to/config/"
+git clone git@github.com:User/repository
+
 ```
 # ssh (secure shell)
 ```shell

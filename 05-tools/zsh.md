@@ -1,3 +1,14 @@
+# 使用
+## setopt(unsetopt)
+
+| 选项名              | 说明                             | 默认值（通常） | 相关 `unsetopt`             |
+| ---------------- | ------------------------------ | ------- | ------------------------- |
+| `correct`        | 启用命令名拼写纠正（如 `ls` 误输为 `sl` 时提示） | ❌ 关闭    | `unsetopt correct`        |
+| `correctall`     | 启用整个命令行（包括参数）的拼写纠正             | ❌ 关闭    | `unsetopt correctall`     |
+| `autocd`         | 输入目录名即可进入（无需 `cd`）             | ❌ 关闭    | `unsetopt autocd`         |
+| `autopushd`      | 使用 `cd` 自动将前目录加入 `pushd` 堆栈    | ❌ 关闭    | `unsetopt autopushd`      |
+| `sharehistory`   | 多个 Zsh 会话共享命令历史                | ❌ 关闭    | `unsetopt sharehistory`   |
+| `histsavenodups` | 保存历史时去除重复项                     | ❌ 关闭    | `unsetopt histsavenodups` |
 # 网络问题
 ![[nvim(Lazyvim)#lazy.nvim#代理换源]]
 # 安装

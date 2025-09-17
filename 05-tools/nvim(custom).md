@@ -5,6 +5,8 @@ XDG_CONFIG_HOME : 配置(~/.config/nvim)
 XDG_DATA_HOME  : [数据]{插件}(~/.local/share/nvim)
 
 XDG_CACHE_HOME : 缓存(~/.cache )
+
+XDG_STATUS_HOME : [状态文件]{如日志,记录}(~/.local/state/nvim)
 ```
 ## 配置案例(pwsh)
 ```powershell
@@ -15,22 +17,38 @@ E:\tools\
     └── nvim-config
 
 #环境变量配置
+# windows
 ## cmd
 set XDG_CONFIG_HOME=E:\tools\nvim-config
 set XDG_DATA_HOME=E:\tools\nvim-config
-set XDG_CACHE_HOME=E:\tools\nvim-config\cache
+#set XDG_CACHE_HOME=E:\tools\nvim-config\cache
+#set XDG_STATUS_HOME=E:\tools\nvim-config\state
 
 ## pwsh
 $env:XDG_CONFIG_HOME = "E:\tools\nvim-config"
 $env:XDG_DATA_HOME   = "E:\tools\nvim-config"
-$env:XDG_CACHE_HOME  = "E:\tools\nvim-config\cache"
+#$env:XDG_CACHE_HOME  = "E:\tools\nvim-config\cache"
+#$env:XDG_STATUS_HOME = "E:\tools\nvim-config\state"
 
+# linux(默认配置情况)
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATUS_HOME="$HOME/.local/state"
 ```
 ## 验证配置是否生效
 ```
-:lua print(vim.fn.stdpath('config'))
-:lua print(vim.fn.stdpath('data'))
-:lua print(vim.fn.stdpath('cache'))
+# 单个输出
+echo stdpath('config')
+echo stdpath('data')
+echo stdpath('cache')
+
+# 整个输出
+echo &runtimepath
+
+# [输出为文件]{依次执行，不要管命令**消失**的问题}
+:redir > ~/nvim_runtimepath.txt
+:echo &runtimepath
+:redir END
 ```
 
 # 配置目录

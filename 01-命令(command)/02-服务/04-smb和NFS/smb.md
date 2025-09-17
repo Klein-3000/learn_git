@@ -1,18 +1,22 @@
-NFS ： Network file system ： 网络文件系统
-smb 与 vsftpd 的区别
-1. vsftpd 不能在线编辑, 处理==大文件==传输
-2. smb 可以在线编辑,  对于频繁的==小文件==操作，SMB提供的无缝集成和更好的目录浏览功能
 # task
 - samba 文件共享服务
 - NFS(网络文件系统)
 - autofs自动挂在服务
 - 读写 访问源 用户控制
 # Samba （smb）
-常用端口
-139
-445
+**常用端口**
+	**139**
+	**445**
+**NFS** ： Network file system ： 网络文件系统
+**smb 与 vsftpd 的区别**
+1. vsftpd 不能在线编辑, 处理==大文件==传输
+2. smb 可以在线编辑,  对于频繁的==小文件==操作，SMB提供的无缝集成和更好的目录浏览功能
+## samba配置问题
+1. 系统权限(**父目录**权限建议为**777**)
+2. ==防火墙,selinux(setenforce 0)==
+3. smb服务的权限
 ## NETBIOS 协议
-NetBIOs是==Network Basic Input/Output System==的简称，网络基本输入/输出系统协议。一般指用于局域网通信的一套 API，是由IBM 公司开发。主要作用:通过 NETBIOS 协议获得计算机名称然后把计算机名解析为对应IP 地址。
+NetBIOS是==Network Basic Input/Output System==的简称，网络基本输入/输出系统协议。一般指用于局域网通信的一套 API，是由IBM 公司开发。主要作用:通过 NETBIOS 协议获得计算机名称然后把计算机名解析为对应IP 地址。
 
 主配置文件<span style="background:yellow;font-size:24px">/etc/samba/smb.conf</span>
 [[NFS|NFS相关命令]]
@@ -109,6 +113,7 @@ mount -t cifs -o username=share,password=123 //192.168.94.148/database /database
 > [!note] 访问samba服务
 > # windows
 > [[#windows 挂载共享]]
+> [[powershell常见命令#smb服务相关的]]
 > # linux
 > [[NFS#查看共享情况(smbclient) | smbclient 命令方法]]
 > [[挂载#挂载smb| mount 命令方法]]
@@ -117,11 +122,12 @@ mount -t cifs -o username=share,password=123 //192.168.94.148/database /database
 # 拓展
 ![[pdbedit]]
 
-## 1.虚拟用户映射
+## 1.虚拟用户映射与修改端口
 ```shell
 [global]
 	security = user
 	username map = /etc/samba/virtual_user_list
+	smb ports = 4445
 [share]
 	path = /tmp/smb_verthandi
 	# 依旧是真实的用户

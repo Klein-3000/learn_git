@@ -1,8 +1,3 @@
-[toc]
-
-04.19 19:43
-powershell
-
 # edit mode
 - emasc
 - vi

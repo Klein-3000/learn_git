@@ -40,8 +40,8 @@ setenforce 0
 > - enforcing   执行;强迫
 > - permissive  宽容的
 > - disabled      禁止
-> ## [[firewall-cmd和selinux#1.firewall-cmd] | firewall-cmd命令]]
-> ## [[firewall-cmd和selinux#2.selinux | selinux]]
+> ## [[(firewall)firewall-cmd和selinux#1.firewall-cmd]| firewall-cmd命令]]
+> ## [[(firewall)firewall-cmd和selinux#2.selinux| selinux]]
 
 
 # 编辑/etc/yum.repos.d/rhel8.repo文件
