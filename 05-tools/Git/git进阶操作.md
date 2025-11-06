@@ -2,6 +2,7 @@
 tags:
   - tools
 ---
+
 ## ==[[git#推送到github上 | 推送到github上]]==
 
 ## git的alias
@@ -187,6 +188,7 @@ git reset [ --mixed ] <hash>
 | git diff <commit_hash1> <commit_hash2><br>git diff HEAD~ HEAD    (上个版本与这个版本) |                                           |
 | ==分支之间==                                                                     |                                           |
 | git diff \<branch1> \<branch2>                                               |                                           |
+| git diff --no-index file1 file2                                              | 比较未跟踪的文件                          |
 ## blame
 ```bash
 git blame <file>
@@ -267,4 +269,25 @@ git commit --amend --author="<name> <email>"
 # 将文件添加到先前的提交
 git commit --amend --no-edit
 git push --force-with-lease origin master
+```
+---
+# 九、添加模块仓库(submodule)
+```
+# 添加子模块
+git submodule add https://github.com/user/repo.git path/to/submodule
+
+# 克隆带子模块的项目
+git clone --recurse-submodules https://github.com/user/main-repo.git
+
+# 初始化并更新已有项目的子模块
+git submodule init
+git submodule update
+
+# 进入子模块并拉取最新
+cd path/to/submodule
+git pull origin main
+
+# 提交子模块版本更新
+git add path/to/submodule
+git commit -m "Update submodule to latest"
 ```

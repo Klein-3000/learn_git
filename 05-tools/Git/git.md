@@ -27,6 +27,9 @@ git status
 
 # 添加到"暂存"(支持正则 * : 所有文件)
 git add <file_name>
+# 排除部分文件或目录
+git add . ':(exclude)fileName'
+
 # 移除~
 git rm --cache <file>
 

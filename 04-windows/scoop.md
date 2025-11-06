@@ -31,4 +31,4 @@
 
 ---
 # 命令
-![[包管理#windows]]
+![[package-management(包管理)#4.windows]]

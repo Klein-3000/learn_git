@@ -34,4 +34,6 @@ rg example
 rg --type py example
 # 或使用拓展名
 rg -g ".py" example
+# 不忽略“.gitignore”忽略的文件
+rg --no-ignore [filename]
 ```

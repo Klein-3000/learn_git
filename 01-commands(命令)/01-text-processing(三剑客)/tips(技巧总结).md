@@ -12,7 +12,7 @@
 > ```
 # grep
 ## 查询时,不输出自身
-![[grep和ripgrep#technique]]
+![[grep-ripgrep#technique]]
 
 # sed
 ![[sed#technique]]

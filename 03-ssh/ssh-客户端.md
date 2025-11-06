@@ -91,6 +91,10 @@ ssh-keygen -y -f ~/.ssh/private_key
 ssh-keygen -y -f ~/.ssh/private_key > public_key.pub
 
 ```
+### Display fingerprints
+```bash
+ssh-keygen -l -f <Public_key>
+```
 ### modify the private key password phrase
 ```shell
 # interactive 

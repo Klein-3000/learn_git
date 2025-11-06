@@ -40,8 +40,8 @@ pdfunite <file1.pdf> <file2.pdf> <...>
 
 ```
 ## 4. fd
-![[find & fd#基本格式]]
-![[find & fd#总结]]
+![[find-fd#基本格式]]
+![[find-fd#总结]]
 # 配置
 - `~/.config/yazi/yazi.toml` on Unix-like systems.
 - [`%AppData%\yazi\config\yazi.toml`]{C:\Users\\\<user>\APPDATA\Roaming\yazi\config\yazi.toml}on Windows.

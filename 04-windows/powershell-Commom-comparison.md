@@ -117,3 +117,61 @@ New-Item -ItemType HardLink  -Target <Target> -Path <Link>
 |目标删除后|仍可访问（数据保留）|变成“悬空链接”|
 |占用空间|不额外占用|不额外占用|
 |文件系统限制|仅 NTFS|仅 NTFS|
+
+# 重命名
+支持添加前缀或后缀
+```powershell
+# 前缀(prefix)
+<object> | rename-item -newname { "prefix" + $_.name }
+
+# 后缀(suffix)--保持原有的拓展名
+<object> | rename-item -newname { $_.basename + "suffix" + $_.extension }
+
+# 正则
+<object> | rename-item -newname { $_.name -replace '<old_string>', '<new_string>'}
+```
+
+# 用户管理
+```powershell
+## 添加
+New-LocalUser -name <UserName> [-Password <Password>]
+
+## 删除
+Remote-local -name <UserName>
+
+## 启用与禁用
+Enable-LocalUser -name <UserName>
+Disable-LocalUser -name <UserName>
+
+## 密码
+Set-LocalUser -name <UserName> -Password (Read-host -AsSecureString) -PasswordNeverExpire $true
+
+## 查看
+### 用户列表
+get-LocalUser
+
+### 用户详细信息
+get-LocalUser -name <UserName> | Format-list *
+```
+# 用户管理
+```powershell
+## 查看组列表
+get-LocalGroup
+
+## 查看组成员
+get-LocalGroupMember -Group -name <GroupName>
+## 加入组
+Add-LocalGroupMember -Group <GroupName> -Member <UserName>
+
+## 退出组
+Remove-LocalGroupMember -Group <GroupName> -Member <UserName>
+
+```
+# 历史命令
+```
+# 历史命令文件的保存路径
+(Get-PSReadLineOption).HistorySavePath
+
+# 修改保存的路径
+Set-PSReadLineOption -HistorySavePath "$HOME/my_history.txt"
+```

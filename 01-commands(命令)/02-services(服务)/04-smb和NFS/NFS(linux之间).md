@@ -30,7 +30,7 @@
 /nfsfile 192.168.45.10(rw,sync,root_squash) /nfsfile 192.168.45.1(ro,sync)
 ```
 ## 相关命令
-[[挂载#NFS服务(nfs-utils)| showmount & exportfs]]
+[[mount(挂载)#NFS服务(nfs-utils)| showmount & exportfs]]
 ## 客户端访问控制写法（重要）
 
 | 写法                | 含义                     | 示例                           |

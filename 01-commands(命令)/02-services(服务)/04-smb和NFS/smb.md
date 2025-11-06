@@ -103,7 +103,7 @@ max log size = 50 # 单位为kb
 ## linux挂载
 通用互联网文件系统（Common Internet File Systems）
 需要==cifs-utils==软件包
-[[挂载| mount 命令解析]]
+[[mount(挂载)| mount 命令解析]]
 ```shell
 mkdir /database
 
@@ -116,7 +116,7 @@ mount -t cifs -o username=share,password=123 //192.168.94.148/database /database
 > [[powershell常见命令#smb服务相关的]]
 > # linux
 > [[NFS#查看共享情况(smbclient) | smbclient 命令方法]]
-> [[挂载#挂载smb| mount 命令方法]]
+> [[mount(挂载)#挂载smb| mount 命令方法]]
 
 
 # 拓展

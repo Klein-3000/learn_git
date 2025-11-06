@@ -1,3 +1,13 @@
+# 进阶进入BIOS(Basic input output system)
+```shell
+shutdown /r /fw /t 0
+```
+## 参数说明
+- /r 重启
+- /fw 直接进入BIOS固件设置
+- /o 重启后进入高级选项
+- /t 0 延迟0秒执行
+
 # 用户管理
 ```cmd
 # 添加用户

@@ -79,5 +79,5 @@ All mount points on 192.168.94.148:
 # 显示版本号
 -v 
 ```
-![[挂载#挂载(mount)#挂载nfs]]
+![[mount(挂载)#挂载(mount)#挂载nfs]]
 

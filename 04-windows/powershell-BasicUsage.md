@@ -30,18 +30,22 @@ eg
 - `$VAR1=$VAR2=1` 同时赋值
 - `$VAR`1,$VAR2=$VAR2,$VAR1` 交换赋值
 输出：$VAR
-删除：del variable：VARName
-查看：test-path variable：[VAR] 默认是全部，可指定，可通配
+删除：[remove-variable]{别名为**rv**} value
+查看：get-variable
+## 环境变量(environment variable)
+设置 : $env:var = "value"
+查看 : $env:var
+删除 : remote-itme **env**:var
+> [!attention] 注意
+> 删除环境变量时,==env==不需要添加**$**
+> 若果添加了**$**,环境变量又是对应一个具体的文件时,就会**删除**这个文件
+### 永久性配置
+设置 
+    用户级 : [Environment]::SetEnvironmentVariable("var", "value", "User")
+    系统级 : [Environment]::SetEnvironmentVariable("var", "value", "Machie")
+删除    
+   就是将对应的"value"改为"$null"即可 
 
-# 4.环境变量（**env**ironment variable）
-- 设置：$env:var="value"
-- 输出：$env:var
-- 查看:ls $env:[var]
-- 删除:del $env:var
-- 不熟悉
-```
-[environment]::setenvironmentvariable（"PATH"，"D:\"，"USER"）
-```
 # 5.powershell脚本执行策略（execution policy）
 获取：get-**execution**policy
 设置：set-**execution**policy  \<value>
