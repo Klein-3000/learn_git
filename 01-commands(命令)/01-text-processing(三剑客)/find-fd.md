@@ -60,7 +60,24 @@ find /path -name "*.tmp" -exec rm {} \;
 默认行为
 	1. 忽略 **.gitignore** 中包含的文件
 	2. 递归搜索
-
+## 总结表
+|选项|说明|
+|---|---|
+|`-H` / `--hidden`|包含隐藏文件和目录（如 `.git`）|
+|`-I` / `--no-ignore`|忽略 `.gitignore`、`.fdignore` 等忽略规则|
+|`-t f`|只找**文件**（`f`=file, `d`=dir, `l`=symlink, `x`=executable）|
+|`-e txt`|只找 `.txt` 扩展名的文件（等价于 `--extension txt`）|
+|`-g "*.md"`|使用 **glob 模式**（如 shell 通配符）而非正则|
+|`-d 2`|最大搜索深度为 2 层目录|
+|`-p` / `--full-path`|在完整路径中匹配（默认只匹配文件名）|
+|`-S +1M`|查找大于 1MB 的文件（支持 `K`, `M`, `G`）|
+|`--changed-within 7d`|查找最近 7 天内修改的文件（支持 `1h`, `30m`, `2w` 等）|
+|`-l` / `--list-details`|显示详细信息（类似 `ls -l`）|
+|`-x command {}`|对每个结果执行命令（`{}` 会被替换为文件路径）|
+|`-X command {}`|将所有结果一次性传给命令（类似 `xargs`）|
+> [!attention] 注意
+> -x 和 -X 参数在pwsh中处理不好,建议使用下面的格式
+> `fd <pattern> <path> | % { command $_}`
 ## 按类型搜索
 使用 `-t` 选项指定搜索的文件类型。
 

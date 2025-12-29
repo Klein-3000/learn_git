@@ -21,6 +21,12 @@
 |q|quiet|安静的(简略输出)|
 |-Qdtq|查询依赖中的垃圾,简略输出||
 
+## manjaro 镜像加速
+```shell
+pacman-mirros --country China
+pacman -Syyu
+```
+
 ## 1.2yay
 ### 1.2.1安装
 #### 安装基础开发工具
@@ -96,6 +102,7 @@ red hat package manager : 红帽包管理器
 | scoop update \[ \* \| package ]                      | ==更新==自己, 所有包, 指定包          |
 | scoop checkup                                        | 检查问题                        |
 | scoop cleanup \[ * \| package ] \[ --force ] \| show | **删除**所有旧的的包,指定包的旧版本。查看缓存内容 |
+| scoop cleanup --cache --all                          | 删除所有包的旧版本并清除下载缓存|
 
 拓展命令
 

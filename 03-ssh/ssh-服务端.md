@@ -16,7 +16,24 @@
 ---
 
 # 配置
+linux
 <span style="background-color:yellow;font-size:40px">/etc/ssh/sshd_config</span>
+windows
+<span style="background-color:yellow;font-size:40px">C:\ProgrameData\ssh\sshd_config</span>
+安装 OpenSSH Server
+```powershell
+Add-WindowsCapability -Oneline -name OpenSSH.Server~~~0.0.1.0
+```
+防火墙
+```powershell
+New-NetFirewallRule -Name "OpenSSH-Server-IN-TCP-22" `
+    -DisplayName "OpenSSH Server (sshd) on TCP/23" `
+    -Direction Inbound `
+    -Protocol TCP `
+    -LocalProt 23 `
+    -Action Allow `
+    -Profile Domain,Private,Public
+```
 ## parameter
 
 | 字段                                         | 含义           |

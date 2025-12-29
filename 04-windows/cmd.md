@@ -17,13 +17,37 @@ net user <userName> /del
 
 # 修改密码
 net user <userName> <password>
+# 设置空密码
+net user <userName> ""
 
 # 查看系统用户(有s)
 net users
 # 查看指定用户
 net user <userName>
+
+
+# 加入组
+net localgroup <groupName> <user> /add
+# 移除组
+net localgroup <groupName> <user> /del
 ```
 # smb服务
+## 创建smb服务--(net share)
+```shell
+# 查看
+net share
+
+# 创建共享
+net share Public=C:\Public /grant:[everyone]{用户},[full]{权限}
+
+# 删除共享
+net share Public /del
+```
+> [!attention] 权限类型
+> READ : 只读
+> GHANGE : 读写(默认)
+> FULL : 完全控制
+
 ## 链接smb服务--(net use)
 ```shell
 # 查看
@@ -38,6 +62,30 @@ net use <Z: | \\IP@port\共享名> /delete
 ```
 > [!attention] persistent的作用
 > 在资源管理中创建一个可以直接访问的**虚拟盘符**出来
+
+
+## 远程桌面(mstsc)
+```PowerShell
+mstsc /[v]{visit : 访问}:<ip_addr>
+
+# 影子会话
+mstsc /shadow:[2]{session id} /control
+
+## session id 的获取
+### 自查
+query session [%USERNAME%] # 只看当前用户
+SESSIONNAME       USERNAME                 ID  STATE   TYPE        DEVICE
+ services                                    0  Disc
+ console           Teacher                  1  Active
+[\>rdp-tcp#0         Student01                2  Active]{shadow 对应的 session}
+### 查看
+query session /server:<ip_addr>
+
+
+
+```
+> [!attention] 注意
+> 家庭版 功能受限,有些功能或命令不能使用
 ## 管理smb服务--(XX-smbshare)
 ### 创建new-smbshare
 ```shell
@@ -194,3 +242,4 @@ everyone 改为系统用户,访问共享目录就要输入系统用户及其密�
 grant : 授予(格兰特)
 revoke : 撤销
 persistent : 持久的
+remark : 备注
