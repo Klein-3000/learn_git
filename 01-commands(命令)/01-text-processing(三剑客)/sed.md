@@ -7,7 +7,7 @@ sed \[Option] \[parameter] \[filename]
 | -n     | ==取消默认==sed的输出,常于p结合使用           |
 | -i     | 直接将修改结果写入文件，不用-i，sed修改的是==内存数据== |
 | -e     | ==多次编辑==,不需要管道符了                 |
-| -r     | 支持正则扩展                           |
+| -r 或 -e    | 支持正则扩展                           |
 
 # parameter
 
@@ -17,6 +17,7 @@ sed \[Option] \[parameter] \[filename]
 | d           | delete             |
 | i           | insert 指定行的==上一行== |
 | p           | print              |
+| G           |        追加空行    |
 | s/正则/替换内容/g | 匹配(==当前==)的行       |
 # matching range
 
@@ -73,3 +74,4 @@ sed 's/\r$//' filename
 | 删除含空格/Tab的“伪空行” | `sed '/^[[:space:]]*$/d' file` ✅ 推荐   |
 | 原地修改文件          | `sed -i '/^[[:space:]]*$/d' file`     |
 | 修改并备份原文件        | `sed -i.bak '/^[[:space:]]*$/d' file` |
+| 1.XXX --> 1. XXX      | `sed -E 's/(^[0-9]+\.)([^[:space:]])/\1 \2/'`|
