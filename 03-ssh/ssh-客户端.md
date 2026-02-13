@@ -19,6 +19,7 @@ Host <myserver>
 	HostName <IP>
 	User <username>
 	Port <port>
+	ProxyJump [user@server]{可以是一个已经配置的**Host**,ssh会自动解析到对应**Host**,}
 	# 建议配置
     # 有添加到ssh-add时，却不指定，ssh会逐个尝试
     IdentityFile /path/to/private/key

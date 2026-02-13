@@ -36,10 +36,10 @@ New-NetFirewallRule -Name "OpenSSH-Server-IN-TCP-22" `
 ```
 ## parameter
 
-| 字段                                         | 含义           |
-| ------------------------------------------ | ------------ |
-| Port 22                                    | 定义端口         |
-| PermitRootLogin yes                        | 是否允许root远程登录 |
-| PublicAuthentication yes                   | 是否允许公钥登录     |
-| AuthorizedKeysFlie ./ssh/authenorized_keys | 公钥存放文件       |
-| PasswordAuthentication yes                 | 是否允许使用密码     |
+| 字段                                                    | 含义           |
+| ----------------------------------------------------- | ------------ |
+| Port 22                                               | 定义端口         |
+| PermitRootLogin yes                                   | 是否允许root远程登录 |
+| PublicAuthentication yes \| [prohibit-password]{禁止密码} | 是否允许公钥登录     |
+| AuthorizedKeysFlie ./ssh/authenorized_keys            | 公钥存放文件       |
+| PasswordAuthentication yes                            | 是否允许使用密码     |
