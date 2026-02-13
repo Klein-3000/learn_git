@@ -11,6 +11,7 @@
 	- https://docker.fxxk.dedyn.io
 - 加速镜像
   - docker.1ms.run
+  - quay.io
   - 对search和pull子命令才有用
     - docker search docker.1ms.run/mysql
     - docker pull docker.1ms.run/mysql
@@ -100,6 +101,8 @@ docker cp host_path container_PATH
 # -v 卷的名字:容器内目录
 
 ```
+> [!attention] 注意
+> [[01-docker-绑定挂载]]
 ### 命名卷挂载(named volumes)--具名挂载和匿名挂载
 > 相关目录==/var/lib/docker/volumes/==
 ```bash
@@ -112,6 +115,7 @@ docker run -v V-name:/usr/share/nginx/html nginx
 # 匿名挂载, 路径识别为container中的路径
 docker run -v /usr/share/nginx/html nginx
 ```
+
 ### volume
 ```bash
 # 创建挂载卷
@@ -196,7 +200,7 @@ docker load -i new.docker.image_naem.tar.gz
 
 # 注意"image_name"只能是小写字母
 # 无论container的状态都可以使用
-docker commit -m "提示信息" -a "作者" container_name_or_id image_name[:tag]
+docker commit -m "提示信息" -a "作者" container_name_or_id [author]image_name[:tag]
 ```
 > [!warning] container_name的含义
 > 不是run启动的images名字
@@ -207,125 +211,7 @@ docker commit -m "提示信息" -a "作者" container_name_or_id image_name[:tag
 > docker run 时,建议加上参数==-d==.不然当前会话就被该容器占用了,ctrl-c容器就停止
 
 ---
-# 4.compose组织container
-## yaml写法
-```yaml
-version:'3' #docker-compose.yml的文件版本
-service:
-  db:  #第一个容器名(db)
-   image: mysql:5.7
-   restart: always # 开机自启动
-   environment:
-     MYSQL_ROOT_PASSWORD:123456
-     MYSQL_DATABASE: wordpress
-     MYSQL_USER: wordpress
-     MYSQL_PASSWORD: 123456 #和下面的WORDPRESS_DB_PASSWORD值要对应上
-  Wordpress:
-    depends_on
-     - db
-    image: Wordpress:5.6
-    ports:
-     - "83:83" # 端口映射
-    restart: always
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: 123456
- 
-```
-
-
-> [!warning] 注意
-> yml只能使用<span style="background:green;color:white">空格</span>,不能使用<span style="background:red;color:white">tab键</span>
-
----
-# 5. Dockerfile
-## 命令(不要忘记最后的==一点==)
-```bash
-# -f 默认自动寻找名为"Dockerfile"文件
-docker build [ -f <dockerfile> ] -t <image_name:tag> .
-```
-## 基础知识
-1. 关键字大写
-2. 从上到下顺序执行
-3. "#"为注释
-4. 每一个指令都会创建提交一个新的镜像层,并提交
-![[docker.png]]
-## 常见关键字
-### 模板
-```dockerfile
-# 本地没有对应的system:tag会去pull
-FROM system:tag
-
-LABEL org.lael-schema.name="" \
-      org.label-schema.author="<author>" \
-      org.label-schema.version="<version>"
-      
-#  设置环境变量(没有"=")   
-ENV <env_name> <env_value>
-
-# docker -it <image_name>时的工作目录
-WORKDIR <DIR>
-
-# 构建这个镜像,执行的命令,一般为dnf,apt之类安装命令
-RUN <command>
-
-# 暴露端口
-EXPOSE <port>
-```
-### 外部交互
-#### COPY
-```Dockerfile
-# 将本地的 src 目录下的所有内容复制到镜像内的 /app 目录下
-COPY ./src /app
-```
-#### ADD
-```Dockerfile
-# 自动解压本地的 application.tar.gz 到镜像内的 /app 目录下
-ADD application.tar.gz /app/
-
-# 或者从网络下载文件并添加到镜像内
-ADD http://example.com/file.zip /usr/local/
-```
-
->📌**Docker 的安全机制限制了对构建上下文外文件的访问**，即使你有权限，也不能直接引用 `/home/mobius/...` 这种绝对路径。
-### 案例
-```dockerfile
-FROM rockylinux:8
-
-LABEL org.label-schema.name="MyCentOS" \
-      org.label-schema.author="mobius" \
-      org.label-schema.version="0.1"
-
-ENV MYPATH /home/
-
-WORKDIR $MYPATH
-
-RUN yum -y install vim nginx
-
-EXPOSE 80
-
-# 创建container时,自动执行命令
-# 创建container时,自动执行命令
-# docker run -it <image_name>才能看到效果
-CMD
-
-ENTRYPOINT
-```
->[!summary] CMD 和ENTRYPOINT的区别
->CMD 覆盖
->ENTRYPOINT 不覆盖,除非使用--entrypoint
->常见用法
->```dockerfile
->FROM rocklinux:8
->ENtrypoint ["ls" ]
->CMD ["-a"]
->```
->常见模式是用 `ENTRYPOINT` 来指定应用本身，而用 `CMD` 来提供该应用的默认参数。这样，用户可以通过在 `docker run` 命令中添加额外的参数来覆盖这些默认参数，而不必重新指定整个命令。
-
-
----
-# 6.docker Network(bridge)
+# 4.docker Network(bridge)
 默认是172.17.0.2 **/16**
 ```shell
 # 创建网络
