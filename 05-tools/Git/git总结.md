@@ -19,7 +19,7 @@ git commit -m "<commit>"\
 git log [ --graph ]
 # 判断一个文件是否被commit过
 ## 没输出就是没commit过,反之亦然
-git log -- <file>
+git log [-p]{查看文件**内容**， 常与**--oneline**结合} -- <file>
 
 ```
 # 恢复与回退

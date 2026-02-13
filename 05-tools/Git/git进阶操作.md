@@ -257,6 +257,12 @@ git stash show -p [ 'stash@{n}' ]
 > `stash@{n}` 不一定必须要加引号。
 > 在pwsh中`@{}`有特殊的用法,所以才必须加引号。
 
+|命令|行为|
+|---|---|
+|`git stash` 或 `git stash push`|仅保存 **已跟踪文件（tracked）** 的修改（包括工作区和暂存区），**不包含 untracked 文件**。|
+|`git stash push -u`|保存已跟踪文件 + **未跟踪文件（untracked）**。|
+|`git stash push -a`（或 `--all`）|保存已跟踪文件 + 未跟踪文件 + **被 `.gitignore` 忽略的文件**（慎用！）。|
+
 ---
 # 八、修改提交记录
 ```bash

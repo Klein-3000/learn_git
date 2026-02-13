@@ -12,15 +12,15 @@ net share <name>=<path> /grant:<user>,<permission>
 ```config
 # /etc/samba/smb.conf
 [global]
-    security = user
+    security = [user]{只能是/etc/passwd中有的用户}
 [ShareName]
     path = /path/to/share
     valid users = <UserName>
-    [read only = on]{必写不然只读，不能读写}
+    [read only = no]{必写不然只读，不能读写}
     
 ```
 ### 拓展版
-#### 权限区分
+#### 用户名映射与权限区分
 ```config
 # /etc/samba/smb.conf
 [global]
@@ -29,11 +29,19 @@ net share <name>=<path> /grant:<user>,<permission>
 [share]
     path = /path/to/share
     valid users = artemis,verthandi
-    [read only = on]{必写不然只读，不能读写}
+    [read only = no]{必写不然只读，不能读写}
     # 区分服务
     [write list = artemis]{artemis 可读可写}
     [read list = verthandi]{verthandi}
 ```
+虚拟用户名配置文件格式
+```shell
+user = virtual_user_name
+# eg
+root = verthandi,thelema
+ 
+```
+
 #### 匿名访问
 ```shell
 [global]
@@ -64,10 +72,23 @@ pdbedit -a <[user]{/etc/passwd 中已有的用户}>
 # 删
 pdbedit -x <user>
 
-# cha
+# 改 注意使用的smbpasswd
+smbpasswd <user>
+# 交互式修改密码
+
+# 查
 pdbedit -L
 	
 ```
+
+|场景|命令|
+|---|---|
+|用户自己改密码|`smbpasswd`|
+|管理员添加用户|`sudo smbpasswd -a user`|
+|重置用户密码|`sudo smbpasswd user`|
+|禁用账户|`sudo smbpasswd -d user`|
+|启用账户|`sudo smbpasswd -e user`|
+|删除 SMB 权限|`sudo smbpasswd -x user`|
 # 访问与离开
 ## win --> linux
 ### 临时挂载

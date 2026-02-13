@@ -4,6 +4,12 @@ tags:
 Type: learn
 ---
 # 基础
+## 基础知识
+💡 Git 中的对象类型：
+- `blob`：文件内容
+- `tree`：目录结构（指向 blob 或子 tree）
+- `commit`：提交信息（指向一个 tree）
+- `tag`：标签
 ## 基本配置
 ```bash
 # 配置
@@ -118,14 +124,39 @@ git push -u origin main
 > 1. 在github添加ssh**公钥**
 > 2. 配置ssh的.config文件
 > 3. 添加远程仓库
-
 ### ssh的.config文件配置
 ```bash
 Host github.com
-HostName github.com
-PreferredAuthentications publickey
-IdentityFile ~/.ssh/<private_key>
+	HostName github.com
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/<private_key>	
+
+Host myserver
+	...
+
 ```
+### 拓展
+```shell
+# 自己的服务器
+git clone <user@IP>[:]{}/path/to/repo
+# 或
+git clone myserver[:]{}/path/to/repo
+# 或 (了解即可)
+git clone ssh://<user@IP>/path/to/repo
+git clone ssh://myserver/path/to/repo
+ 
+```
+**非裸仓库默认不允许 push 到它的当前分支**（会报错 "refusing to update checked out branch"）。所以推荐用裸仓库作为中心仓库
+#### 裸仓库创建
+```shell
+# 从零开始
+git init --bare
+
+# 从旧仓库创建
+git clone --bare <old-repo> <bare-repo>
+ 
+```
+
 ## https(每次都要输入账号和密码?)
 ```bash
 git remote add origin https://github.com/account/repository.git
@@ -138,7 +169,18 @@ eg
 git push -u origin master:main
 
 ```
+## token
+```bash
+git remote add origin https://[oauth2:]{可选}<token>[@]{注意有**@**符号}github.com/account/repository.git
+eg
+git remote add origin https://github.com/Klein-3000/learn_git.git
 
+# master中
+git push -u <远程主机> <本地分支>:<远程分支>
+eg
+git push -u origin master:main
+
+```
 ---
 # 其他
 ## 检查LF(linux & macOS) 与 CRLF(windows)问题
@@ -157,6 +199,7 @@ git ls-files --eol | grep -i "crlf"
 8. conflict 冲突
 9. pick 选择
 10. fixup 修正
+11. bare : 裸露的
 
 > [!summary] 对比
 > git branch : pwd  显示在哪个分支上
