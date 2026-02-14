@@ -7,9 +7,9 @@
 ## 基于现有分支
 git worktree add [<path/to/directory(worktreeName)>]{常见取值 **../仓库根目录**, 使其与当前仓库**并列**} <branch>
 ## 新建分支
-git worktree -b <branch> <path/to/directory(worktreeName)>
+git worktree add -b <branch> <path/to/directory(worktreeName)>
 ## 基于远程分支
-git worktree -b <branch> <path/to/directory(worktreeName)> origin/<remote-branch>
+git worktree add -b <branch> <path/to/directory(worktreeName)> origin/<remote-branch>
 
 # 2. 查看
 git worktree list
