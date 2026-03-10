@@ -41,6 +41,7 @@ git worktree add ../yellow-hide hide
 cd ../yellow-hide
 git sparse-checkout init
 git sparse-checkout < add | set > <subdirectory>
+[git checkout]{**重中之重**,sparse-checkout设置的规则才会**生效**}
 
 # 查看
 ## 有哪些目录

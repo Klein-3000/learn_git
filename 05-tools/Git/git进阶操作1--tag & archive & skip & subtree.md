@@ -13,7 +13,8 @@ git tag -a <tag> [< hash >]{历史提交的哈希值} -m  < message >
 git tag -d <tag>
 ## 删除远程
 git push origin :refs/tags/<tag>
-
+#(简化版)
+git push --delete origin <tag>
 # 查
 ## 查看有哪些标签
 git tag

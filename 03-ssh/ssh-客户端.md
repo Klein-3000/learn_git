@@ -146,10 +146,16 @@ ssh-copy-id -i /path/to/public/key  username@remote_host
 | -------------------------- | ---------------------- |
 | `eval $(ssh-agent)`        | 启动 `ssh-agent`,操作对象时私钥 |
 | `ssh-add ~/.ssh/id_rsa`    | 添加私钥                   |
-| `ssh-add -l`               | 列出已加载的**公钥的指纹**        |
+| `ssh-add -l`               | 列出已加载的公钥的(**指纹**)      |
 | `ssh-add -D`               | 删除所有已加载的**私钥**         |
 | `ssh-add -d ~/.ssh/id_rsa` | 删除指定已加载的**私钥**         |
-| `ssh-add -L`               | 显示所有公钥                 |
+| `ssh-add -L`               | 列出已加载的公钥的(**完整信息**)    |
+## ssh-add & ssh-keygen
+
+|工具|想要得到 完整公钥 (Public Key String)|想要得到 指纹 (Fingerprint)|参数记忆逻辑|
+|:--|:--|:--|:--|
+|`ssh-add`|`-L` (大写 L)|`-l` (小写 l)|L = Long (长公钥)  <br>l = list summary (短指纹)|
+|`ssh-keygen`|`-y`|`-l` (小写 l)|y = Yield (生成公钥)  <br>l = Length (显示长度+指纹)|
 ## environment variable
  $SSH_AUTH_SOCK 
  $SSH_AGENT_PID

@@ -1,7 +1,7 @@
 # 命令
-## 检查配置(textparm)
+## 检查配置(testparm)
 ```
-textparm
+testparm
 ```
 ## 编辑认证用户(pdbedit)
 ![[pdbedit]]
