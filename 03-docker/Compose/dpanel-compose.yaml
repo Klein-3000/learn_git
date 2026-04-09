@@ -1,0 +1,17 @@
+services:
+  dpanel:
+    image: dpanel/dpanel:latest
+    container_name: dpanel
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8807:8080"
+    environment:
+      - APP_NAME=dpanel
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - dpanel:/dpanel
+
+volumes:
+  dpanel:
+

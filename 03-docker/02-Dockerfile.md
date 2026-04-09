@@ -68,7 +68,7 @@ ADD http://example.com/file.zip /usr/local/
 > 
 
 ### 3.3 CMD & ENTRYPOINT
-#### CMD
+#### CMD(替换)
 ```Dockerfile
 # 生成名为 Mylinux 镜像
 FROM alpine
@@ -86,19 +86,19 @@ CMD ["/bin/sh", "-c","echo 'hello' > test.txt && cat test.txt"]
 
 // 输出 `hello`
 ```
-#### ENTRYPOINT
+#### ENTRYPOINT(追加)
 ```Dockerfile
 # 生成名为 Mylinux 镜像
 FROM alpine
 ENTRYPOINT ["echo","hello from ENTRYPOINT"]
 
 # result
-docker run -it Mylinux               // 输出 `hello from ENTRYPOINT`
-docker run -it Mylinux "world"       // 输出 `hello from ENTRYPOINT [world]{追加到ENTRYPOINT的后面}`
-docker run -it --entrypoint "whoami" // 输出 `root`
+docker run -it Mylinux                        // 输出 `hello from ENTRYPOINT`
+docker run -it Mylinux "world"                // 输出 `hello from ENTRYPOINT [world]{追加到ENTRYPOINT的后面}`
+docker run -it [--entrypoint]{必须在镜像**之前**,且**后面紧跟**要替换的命令} "whoami" Mylinux  // 输出 `root`
 
 ```
-#### ENTRYPOINT + CMD
+#### ENTRYPOINT(命令) + CMD(默认参数)
 ```Dockerfile
 FROM alpine
 ENTRYPOINT ["echo"]
@@ -112,7 +112,7 @@ docker run -it Mylinux "custom msg" // 输出 `custom msg`
 ```
 >[!summary] CMD 和ENTRYPOINT的区别
 >CMD 覆盖
->ENTRYPOINT 不覆盖,除非使用--entrypoint
+>ENTRYPOINT 不覆盖,除非使用--entrypoint(必须在镜像**之前**,且**后面紧跟**要替换的命令)
 >常见用法
 >```dockerfile
 >FROM rocklinux:8
@@ -136,11 +136,9 @@ LABEL org.label-schema.name="MyCentOS" \
       org.label-schema.version="0.1"
 
 ENV MYPATH /home/
-
 WORKDIR $MYPATH
 
 RUN yum -y install vim nginx
-
 EXPOSE 80
 
 # 创建container时,自动执行命令

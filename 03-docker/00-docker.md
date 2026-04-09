@@ -22,25 +22,16 @@
 ```json
 {
   "registry-mirrors": [
-    "https://docker.m.daocloud.io"
-  ]
+    "https://docker.1ms.run"
+  ],
+  "data-root" : "/data",
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m",
+    "max-file": "3"
+  }
 }
 
-# 或者
-{
-"registry-mirrors":[
-  "https://registry.docker-cn.com",
-  "http://hub-mirror.c.163.com",
-  "https://dockerhub.azk8s.cn",
-  "https://mirror.ccs.tencentyun.com",
-  "https://registry.cn-hangzhou.aliyuncs.com",
-  "https://docker.mirrors.ustc.edu.cn",
-  "https://docker.m.daocloud.io",
-  "https://noohub.ru",
-  "https://huecker.io",
-  "https://dockerhub.timeweb.cloud"
-]
-}
 ```
 <span style="background:yellow;font-size:40px">/var/lib/docker</span>
 # 3.命令
@@ -132,6 +123,8 @@ docker volume rm <volume_name>
 # 删除所有没有使用的挂载卷
  docker volume prune -a
 ```
+#### 挂载
+![[docker3(--mount).png]]
 ### rcontainer之间(--volumes-from)---数据卷容器
 ```bash
 docker run --name docker02 --volumes-from docker01 <images_name>
@@ -189,7 +182,31 @@ docker rm [ -f ]container_name
 
 # 容器信息
 docker inspect container_name_or_id
+
 ```
+### inspect
+Docker 会按以下**优先级顺序**在本地数据库中查找匹配项：
+1. **Container（容器）**
+2. **Image（镜像）**
+3. **Local volume（本地卷）**
+4. **Network（网络）**
+5. **其他（Swarm 相关对象）**
+> 🔍 **关键点**：**容器优先于镜像**！
+
+```bash
+# 明确 inspect 镜像
+docker inspect --type=image nginx
+
+# 明确 inspect 容器
+docker inspect --type=container nginx
+
+# inspect 网络
+docker inspect --type=network mynet
+
+# inspect 卷
+docker inspect --type=volume myvol
+```
+
 ## 6. save and load
 ```bash
 # 打包镜像(源文件->新文件)
@@ -215,7 +232,10 @@ docker commit -m "提示信息" -a "作者" container_name_or_id [author]image_n
 默认是172.17.0.2 **/16**
 ```shell
 # 创建网络
-docker network create [ --driver bridge ] --subnet 172.16.0.0/16 --gateway 172.16.0.1 <Network_name>
+docker network create [ --driver bridge ] [--subnet 172.18.0.0/16 --gateway 172.18.0.1] <Network_name>
+
+# 查看网络
+docker network ls
 
 # 删除网络
 docker network rm <network_name>
@@ -227,6 +247,9 @@ docker run [ --net bridge ] [--ip <ip> ]<image_name>
 # 指定网络
 docker --Network <network_name> 
 ```
+> [!attention] 注意
+> 1. `--subnet` 和`--gateway` 建议一起使用,单独使用`--subnet`参数,docker不会自动配置gateway
+
 > [!summary] 总结
 > bridge 的container **不能**直接通过主机名ping通
 > custom net 的container **可以**直接通过主机名ping通
@@ -239,3 +262,4 @@ docker network connect <network> <container> [ --alias <alias> ]
 # 断开链接
 docker network disconnect [ -f ] <network> <container>
 ```
+
