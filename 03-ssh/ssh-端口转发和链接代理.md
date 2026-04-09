@@ -58,7 +58,7 @@ Host localPort
 ```
 > [!attention] 注意
 > 远程端口转发需要开启
-> - `GatewayPorts clientspecified`：允许客户端用 `-R [bind:]port:...` 指定绑定地址
+> - `GatewayPorts clientspecified`：允许客户端用 `-R [bind:]port:...` 必须手动指定绑定地址，否则依旧是 `-R localhost:prot:...`
 > - `GatewayPorts yes`：所有 `-R` 自动绑定到 `0.0.0.0`
 
 ✅ **一句话记住**：

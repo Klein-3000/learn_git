@@ -20,13 +20,15 @@ New-NetFirewallRule -Name "OpenSSH-Server-IN-TCP-22" `
 
 ## parameter
 
-| 字段                                                          | 含义           |
-| ----------------------------------------------------------- | ------------ |
-| Port 22                                                     | 定义端口         |
-| PermitRootLogin yes                                         | 是否允许root远程登录 |
-| PublicAuthentication yes \| [prohibit-password]{允许登录,但禁止密码} | 是否允许公钥登录     |
-| AuthorizedKeysFlie ./ssh/authenorized_keys                  | 公钥存放文件       |
-| PasswordAuthentication yes                                  | 是否允许使用密码     |
+| 字段                                                          | 含义                                                                                                                                           |
+| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Port 22                                                     | 定义端口                                                                                                                                         |
+| PermitRootLogin yes                                         | 是否允许root远程登录                                                                                                                                 |
+| PublicAuthentication yes \| [prohibit-password]{允许登录,但禁止密码} | 是否允许公钥登录                                                                                                                                     |
+| AuthorizedKeysFlie ./ssh/authenorized_keys                  | 公钥存放文件                                                                                                                                       |
+| PasswordAuthentication yes                                  | 是否允许使用密码                                                                                                                                     |
+| AllowTCPForwarding yes                                      | 端口转发的基础                                                                                                                                      |
+| GatewayPort no                                              | - `no`: 只有服务器才能访问<br>- `yes` : 其他主机==通过==服务器能访问<br>-`clientspecified` : 客户端明确指定谁能访问(默认localhost)<br>eg<br>`ssh -R 0.0.0.0:80:localhost:8080` |
 ## 配置
 ```shell
 # Port 22

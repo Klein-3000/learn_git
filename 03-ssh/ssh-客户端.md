@@ -137,9 +137,40 @@ ssh-copy-id -i /path/to/public/key  username@remote_host
 > [!note] 上传到哪里
 > .ssh/authorzed_keys 文件中
 > `-i` 参数后面跟的是你的公钥文件路径（默认是 `~/.ssh/id_rsa.pub`）
-> 
+## 说明
+### 搜索
+```
+which ssh-copy-id | xargs grep 'use_id_file()' -A 10
+```
+### 代码
+```bash
+use_id_file() {
+  L_ID_FILE="$1"
+  # ...
+  if expr "$L_ID_FILE" : '.*\.pub$' >/dev/null ; then
+    PUB_ID_FILE="$L_ID_FILE"
+  else
+    PUB_ID_FILE="$L_ID_FILE.pub"   # ← 自动补 .pub
+  fi
+  # ...
+}
+```
+### 测试
+```bash
+Lenovo@LAPTOP-HS0L4TOD MINGW64 ~/.ssh
+$ ssh-copy-id  -i Gitee kali
 
-# ssh-agent
+/usr/bin/ssh-copy-id: ERROR: failed to open ID file ['Gitee.pub']{自动添加 **.pub** 后缀}: No such file or directory
+
+Lenovo@LAPTOP-HS0L4TOD MINGW64 ~/.ssh
+$ ls Gitee*
+Gitee  Gitee.pub.bak
+
+```
+> [!summary] 总结
+> `ssh-copy-id` 用的一定是 Public Key，且不会自动将 Private Key 转换为 Public Key，只是自动添加 `.pub` 后缀。它只会使用 Private Key 用于测试 Public Key 是否已经上传过了，对 Private Key 的操作也仅此而已。
+
+ # ssh-agent
 ## summary
 
 | 命令                         | 含义                     |
