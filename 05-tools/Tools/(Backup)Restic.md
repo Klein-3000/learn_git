@@ -5,6 +5,9 @@ function: 文件备份
 ---
 官网 : https://restic.net
 [restic 文档 — restic 0.18.1 文献](https://restic.readthedocs.io/en/stable/)
+
+
+![[(Backup)Restic-仓库结构#目录结构]]
 # 一、初始化
 ```shell
 # 本地
@@ -27,6 +30,7 @@ restic  [backup]{备份}  [/path/to/src1]{推荐使用**相对路径**}  [--dry-
 >> `--exclude '正则'` : 排除不要备份的(backup子命令特有)
 >> `--Include '正则'` : 只恢复指定的备份(restore子命令特有)
 
+[[#6.2 stats]] 
 # 三、快照管理
 ```shell
 # 查看
@@ -97,6 +101,10 @@ restic restore < latest | snapshots_id > --target /path/to/[dst]{一般不写dst
 # 1. 查看单个文件内容
 # stdout
 restic dump <snapshots_id> [<path/to/file>]{`restic ls`输出的路径} 
+# 1.1 查看文本文件
+restic dump <snapshots_id> [<path/to/file>]{`restic ls`输出的路径} | cat
+# 1.2 查看图片
+restic dump <snapshots_id> [<path/to/file>]{`restic ls`输出的路径} | mpv -
 
 # 2. 提取整个文件夹为Tar包(默认)
 restic dump <snapshots> <path/to/dir> [-a zip ]{指定其他归档类型,默认为 **tar**} [-t]{target} archive.tar
@@ -206,9 +214,10 @@ restic rewrite --exclude '正则' [-n]
 |后续操作|需要手动删除旧快照或带 `rewrite` 的新快照。|通常紧接着运行 `prune` 来释放空间。|
 # 七、自动化
 > [!note] 环境变量
+> `$env:restic_repository` : 设置仓库路径,后续 restic 命令不需要使用`-r`指定仓库
+> `$env:restic_from_repository` : 设置仓库路径,后续 restic 命令不需要使用`-from-repo`指定仓库
 > `$env:restic_password`设置密码,与restic交互时,不用每次都需要输入密码
 > `$env:restic_password_file`:指定密码文件,更安全
-> `$env:restic_repository` : 设置仓库路径,后续 restic 命令不需要使用`-r`指定仓库
 > `$env:restic_cache_dir`: 设置缓存目录
 ### 案例
 ```shell

@@ -1,4 +1,26 @@
-# !
+# 一、全局配置
+## 环境变量
+> [!summary] 总结
+> 1. `/etc/profile` 会自动加载 `/etc/profile.d/*.sh` 文件
+> 2. 推荐创建 `/etc/profile.d/script.sh`
+> 3. 一般不推荐全局配置环境变量 **容易起冲突**
+```
+# 全局环境变量
+export EDITOR=vim
+```
+
+## 命令别名
+- bash --> /etc/bash.bashrc
+- zsh  --> /etc/zsh/zshrc
+```bash
+# 到对应的 全局 *rc 文件中配置
+# 即可所有用户都能使用
+alias 
+```
+
+---
+
+# 二、!
 ```bash
 !^ : 第一个参数
 !$ : 最后一个参数
@@ -10,7 +32,10 @@
 > ```
 > shopt -s histexpand
 > ```
-# {}
+
+---
+
+# 三、{}
 ## 重命名
 ```bash
 mv 1.txt{,.bak} --> mv 1.txt 1.txt.bak
@@ -21,12 +46,23 @@ mv 1.txt{.bak,} --> mv 1.txt.bak 1.txt
 ```bash
 mkdir -p /opt/{dir1,dir2}
 ```
-# grep
+
+---
+
+# 四、grep
 ## 查询时,不输出自身
 ![[grep-ripgrep#technique]]
 
-# sed
+
+---
+
+# 五、sed
 ![[sed#technique]]
 
-# awk
+
+---
+
+# 六、awk
 ![[awk#technique]]
+
+

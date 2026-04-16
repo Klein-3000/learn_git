@@ -1,14 +1,78 @@
-# 配置环境变量指定neovim的数据和配置路径
+# 一、nvim 相关目录认识
 ```powershell
-XDG_CONFIG_HOME : 配置(~/.config/nvim)
+XDG_CONFIG_HOME : 配置文件目录 (~/.config/nvim | $env:LOCALAPPDATA/nvim)
 
-XDG_DATA_HOME  : [数据]{插件}(~/.local/share/nvim)
+XDG_DATA_HOME   : [应用数据]{插件、LSP、DAP、Tree-sitter} (~/.local/share/nvim | $env:LOCALAPPDATA/nvim-data)
 
-XDG_CACHE_HOME : 缓存(~/.cache )
+XDG_CACHE_HOME  : [缓存]{临时文件、高亮缓存} (~/.cache/nvim | 系统临时目录，如 %TEMP%/nvim)
 
-XDG_STATUS_HOME : [状态文件]{如日志,记录}(~/.local/state/nvim)
+XDG_STATE_HOME  : [状态数据]{历史记录、Shada、日志、视图} (~/.local/state/nvim | $env:LOCALAPPDATA/nvim-data)
 ```
-## 配置案例(pwsh)
+## 1.1 目录结构
+#### linux
+```shell
+~/.config
+└───nvim
+	├───[init.lua]{主要配置文件,通过`require("config.<fileName>")`调用,就会**加载**lua/config/目录中`.lua`文件的**配置**}
+	├───[lazy-lock.json]{lazy管理插件的**版本**}
+    └───lua
+        ├───[config]{一般配置 "keymap.lua","options.lua","lazy.lua"等文件}
+        └───[plugins]{存放,通过lazy安装插件的**配置**}
+        
+# 插件本体的安装目录
+~/.local/share/nvim/lazy
+
+```
+#### windows
+```shell
+[C:\User\<UserName>\AppData\local]{资源管理中输入 %LOCALAPPDATA%}
+├───[nvim]{与linux的"nvim"目录一致}
+└───[nvim-Data\lazy]{插件本体的安装目录}
+ 
+```
+## 1.2 验证
+### 命令 (linux 和 windows 通用)
+```
+nvim --headless --noplugin -u NONE -i NONE -c 'lua io.write(vim.inspect({
+    config = vim.fn.stdpath("config"),
+    data   = vim.fn.stdpath("data"),
+    cache  = vim.fn.stdpath("cache"),
+    state  = vim.fn.stdpath("state"),
+    log    = vim.fn.stdpath("log")
+}))' -c 'qa!'
+```
+### 结果
+#### window
+```json
+{
+  cache = "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\nvim",
+  config = "C:\\Users\\Lenovo\\AppData\\Local\\nvim",
+  data = "C:\\Users\\Lenovo\\AppData\\Local\\nvim-data",
+  log = "C:\\Users\\Lenovo\\AppData\\Local\\nvim-data",
+  state = "C:\\Users\\Lenovo\\AppData\\Local\\nvim-data"
+}
+```
+#### linux
+```json
+{
+  cache = "/home/kali/.cache/nvim",
+  config = "/home/kali/.config/nvim",
+  data = "/home/kali/.local/share/nvim",
+  log = "/home/kali/.local/state/nvim",
+  state = "/home/kali/.local/state/nvim"
+}%
+```
+
+# 二、配置环境变量指定neovim的数据和配置路径
+## 2.1  Windows 上让所有路径都集中在 `AppData\Local`（便于备份）
+```powershell
+# PowerShell: 永久设置（当前用户）
+[Environment]::SetEnvironmentVariable("XDG_CONFIG_HOME", "$env:LOCALAPPDATA\nvim", "User")
+[Environment]::SetEnvironmentVariable("XDG_DATA_HOME", "$env:LOCALAPPDATA\nvim-data", "User")
+[Environment]::SetEnvironmentVariable("XDG_STATE_HOME", "$env:LOCALAPPDATA\nvim-state", "User")
+[Environment]::SetEnvironmentVariable("XDG_CACHE_HOME", "$env:LOCALAPPDATA\nvim-cache", "User")
+```
+## 2.2 配置案例(pwsh)
 ```powershell
 E:\tools\
     ├── fastfetch
@@ -35,7 +99,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATUS_HOME="$HOME/.local/state"
 ```
-## 验证配置是否生效
+## 2.3 验证配置是否生效
 ```
 # 单个输出
 echo stdpath('config')
@@ -51,29 +115,7 @@ echo &runtimepath
 :redir END
 ```
 
-# 配置目录
-## linux
-```shell
-~/.config
-└───nvim
-	├───[init.lua]{主要配置文件,通过`require("config.<fileName>")`调用,就会**加载**lua/config/目录中`.lua`文件的**配置**}
-	├───[lazy-lock.json]{lazy管理插件的**版本**}
-    └───lua
-        ├───[config]{一般配置 "keymap.lua","options.lua","lazy.lua"等文件}
-        └───[plugins]{存放,通过lazy安装插件的**配置**}
-        
-# 插件本体的安装目录
-~/.local/share/nvim/lazy
-
-```
-## windows
-```shell
-[C:\User\<UserName>\AppData\local]{资源管理中输入 %LOCALAPPDATA%}
-├───[nvim]{与linux的"nvim"目录一致}
-└───[nvim-Data\lazy]{插件本体的安装目录}
- 
-```
-# 插件总结
+# 三、插件总结
 
 | 插件                                                                              | 作用                                                                              |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
@@ -90,7 +132,7 @@ echo &runtimepath
 | smear-cursor.nvim                                                               | 光标动画                                                                            |
 | rainbow-delimiters.nvim                                                         | 不同深度显示不同的花括号                                                                    |
 |                                                                                 |                                                                                 |
-# nvim中文输入(windows)
+# 四、nvim中文输入(windows)
 > [!summary] 总结
 > 需要[im-select.exe]([github.com/daipeihust/im-select](https://github.com/daipeihust/im-select))
 > [配置文档(macOS)]{[姜绍彬的博客](https://shaobin-jiang.github.io/blog/posts/neovim-ime/)}
