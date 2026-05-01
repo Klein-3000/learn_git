@@ -1,5 +1,5 @@
 ---
-banner: file:///D:\Users\Lenovo\Pictures\vup\banner-小猫女仆降临.avif
+banner: banner-小猫女仆降临.avif
 banner-height: 250
 ---
 
