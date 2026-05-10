@@ -5,7 +5,7 @@ mysql命令行清屏
 # 查询
 ## 基本查询
 ```
-select \* from <table_name>
+select * from <table_name>
 ```
 ### 修改列名
 ```shell
@@ -15,21 +15,21 @@ select name as "名字", age as "年龄" from <table_name>
 ## 条件判断(where, 写在==from==的后面)
 ### 大小 (>, >=, <= <, \==, !=)
 ```shell
-select \* from <table_name>
+select * from <table_name>
 where
 	age > 20;
  
 ```
 ### 逻辑(or, and, ==not==) 
 ```shell
-select \* from <table_name>
+select * from <table_name>
 where
 	class == '2班' and age >= 20;
  
 ```
 ### 模糊(like) 
 ```shell
-select \* from <table_name>
+select * from <table_name>
 where
 	name like '%李%';
  
@@ -61,7 +61,7 @@ order by
 ### 截断和偏移(limit,==下标==) 
 下标从==0==开始
 ```shell
-select \* from <table_name>
+select * from <table_name>
 limit [start:0]  <offset>
  
 ```

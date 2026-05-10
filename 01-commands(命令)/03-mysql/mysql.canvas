@@ -1,0 +1,37 @@
+{
+	"nodes":[
+		{"id":"30908ba35eb39bad","type":"group","x":-1720,"y":-507,"width":1740,"height":1687,"color":"6","label":"02-表格操作"},
+		{"id":"a7689e2015d3d2e8","type":"group","x":260,"y":740,"width":1640,"height":600,"color":"3","label":"01-用户管理"},
+		{"id":"1884713e8fe179a3","x":1040,"y":-687,"width":440,"height":1042,"color":"5","type":"group","label":"03-拓展"},
+		{"id":"1b6c7a3e6778e1ac","type":"text","text":"mysql","x":260,"y":-40,"width":250,"height":60},
+		{"id":"0c32439856acae7e","type":"file","file":"01-commands(命令)/03-mysql/mysql-user.md","x":1200,"y":760,"width":640,"height":480},
+		{"id":"764e676be333ccda","type":"text","text":" \n\n| 命令                                                                   | 作用        |\n| -------------------------------------------------------------------- | --------- |\n| `create user '<user>'@'<host>' identified by '<passwd>`              | 创建用户      |\n| `rename user '<old_user>'@'<old_host>' to <new_user>'@'<old_host>'`  | 修改名字和主机限制 |\n| `alter user '<user>'@'<host>' identified by '<new_passwd>'`          | 修改密码      |\n| `grant '<permission>' on <database>.<table> to '<user>@<host>'`      | 修改权限      |\n| `revoke '<permisson>' on <database>.<table> from '<user>'@'<host>' ` | 撤销权限      |\n| `drop user '<user>'@'<host>'`                                        | 删除用户      |\n","x":300,"y":765,"width":760,"height":475},
+		{"id":"f3e13d0b54937079","type":"file","file":"01-commands(命令)/03-mysql/mysql-tables.md","x":-400,"y":-40,"width":400,"height":600,"color":"4"},
+		{"id":"3c781621d765ea98","type":"file","file":"01-commands(命令)/03-mysql/mysql-databases.md","x":-400,"y":-620,"width":400,"height":480,"color":"3"},
+		{"id":"0d382c5d8ae932eb","type":"text","text":"\n| sql                                           | 说明  |\n| --------------------------------------------- | --- |\n| `where name = \"iuno\";`                        | 单条件 |\n| `where name = \"iuno\" and  birthday = \"9i11\";` | 多条件 |\n| `where name = \"iuno\" or  birthday = \"9i11\";`  | 多条件 |\n| `where name like '李%';`                       | 匹配  |\n匹配法\n- `%` : 多个\n- `_`: 单个","x":-1080,"y":-267,"width":580,"height":407},
+		{"id":"27190632dde0a08c","type":"text","text":"不加`where`作用对象是**整个**表格","x":-945,"y":400,"width":250,"height":60},
+		{"id":"e799f7c2088f7d50","type":"file","file":"01-commands(命令)/03-mysql/mysql-table-select.md","x":-1560,"y":-380,"width":400,"height":400,"color":"5"},
+		{"id":"61c4ef2987ce5b90","type":"file","file":"01-commands(命令)/03-mysql/mysql-table-insert.md","x":-1560,"y":60,"width":400,"height":400,"color":"5"},
+		{"id":"a0f602afcb258fa6","type":"file","file":"01-commands(命令)/03-mysql/基本流程.md","x":185,"y":-782,"width":400,"height":515,"color":"1"},
+		{"id":"86094f76b0abb2b0","type":"file","file":"01-commands(命令)/03-mysql/mysql-command & config.md","x":1060,"y":-667,"width":400,"height":400,"color":"2"},
+		{"id":"11ba3365c20ea90f","type":"file","file":"03-docker/03-compose-mysql.md","x":1060,"y":-55,"width":400,"height":390},
+		{"id":"1ae011a85b5063d9","type":"file","file":"01-commands(命令)/03-mysql/mysql-table-delete.md","x":-945,"y":680,"width":400,"height":400,"color":"5"},
+		{"id":"d03c916a81e5e9c1","type":"file","file":"01-commands(命令)/03-mysql/mysql-table-update.md","x":-1560,"y":680,"width":400,"height":400,"color":"5"}
+	],
+	"edges":[
+		{"id":"9d2b41bab06b4745","fromNode":"3c781621d765ea98","fromSide":"right","toNode":"1b6c7a3e6778e1ac","toSide":"left","label":"database"},
+		{"id":"77f1649c222138a3","fromNode":"f3e13d0b54937079","fromSide":"right","toNode":"1b6c7a3e6778e1ac","toSide":"left","label":"table"},
+		{"id":"666d13de3ef48f5f","fromNode":"e799f7c2088f7d50","fromSide":"right","toNode":"0d382c5d8ae932eb","toSide":"left"},
+		{"id":"39e59e9d08aaeb1f","fromNode":"61c4ef2987ce5b90","fromSide":"right","toNode":"f3e13d0b54937079","toSide":"left","label":"增"},
+		{"id":"5751466ec9f79bce","fromNode":"d03c916a81e5e9c1","fromSide":"top","toNode":"27190632dde0a08c","toSide":"bottom","label":"改"},
+		{"id":"5a4303496babb784","fromNode":"1ae011a85b5063d9","fromSide":"top","toNode":"27190632dde0a08c","toSide":"bottom","label":"删"},
+		{"id":"34c5008ba9300107","fromNode":"27190632dde0a08c","fromSide":"top","toNode":"f3e13d0b54937079","toSide":"left"},
+		{"id":"4ee357c60f98efb4","fromNode":"0c32439856acae7e","fromSide":"left","toNode":"764e676be333ccda","toSide":"right"},
+		{"id":"8a63af01e0057f53","fromNode":"a7689e2015d3d2e8","fromSide":"top","toNode":"1b6c7a3e6778e1ac","toSide":"bottom","label":"user management"},
+		{"id":"6ba11ffaf7a0e10b","fromNode":"0d382c5d8ae932eb","fromSide":"right","toNode":"f3e13d0b54937079","toSide":"left","label":"查"},
+		{"id":"df758e15483e4dc1","fromNode":"a0f602afcb258fa6","fromSide":"bottom","toNode":"1b6c7a3e6778e1ac","toSide":"top","label":"basic process"},
+		{"id":"e7ab50a1aa34853f","fromNode":"86094f76b0abb2b0","fromSide":"bottom","toNode":"1b6c7a3e6778e1ac","toSide":"top","label":"command & config"},
+		{"id":"61195d4bc6cd8987","fromNode":"11ba3365c20ea90f","fromSide":"left","toNode":"1b6c7a3e6778e1ac","toSide":"right","label":"docker (compose)"},
+		{"id":"623d361adcd09a8f","fromNode":"86094f76b0abb2b0","fromSide":"right","toNode":"11ba3365c20ea90f","toSide":"right","label":"`99-custom.cnf` 配置"}
+	]
+}
