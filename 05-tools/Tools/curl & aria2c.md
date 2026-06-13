@@ -1,17 +1,5 @@
-# curl
-## 下载文件
-```shell
-# 原名保存到当前目录下
-curl [-O]{--remote-name} https://example.com/src.zip
-
-# 重命名保存
-curl [-o]{--output} local-src.zip https://example.com/src.zip
-
-# 原名保存到其他目录下
-curl --output-dir /src/ -O https://example.com/src.zip
- 
-```
-## 配置文件
+# 1. curl
+## 1.1 配置文件
 ```shell
 # 自动跟随重定向
 -L
@@ -29,7 +17,21 @@ curl --output-dir /src/ -O https://example.com/src.zip
 --retry-delay 2
  
 ```
-## webdav 操作
+
+## 1.2 下载文件
+```shell
+# 原名保存到当前目录下
+curl [-O]{--remote-name} https://example.com/src.zip
+
+# 重命名保存
+curl [-o]{--output} local-src.zip https://example.com/src.zip
+
+# 原名保存到其他目录下
+curl --output-dir /src/ -O https://example.com/src.zip
+ 
+```
+
+## 1.3 webdav 操作
 | 操作  | curl 命令                                                          |
 | --- | ---------------------------------------------------------------- |
 | 上传  | `curl -q -u user:pass -T local remote`                           |
@@ -38,6 +40,17 @@ curl --output-dir /src/ -O https://example.com/src.zip
 | 建目录 | `curl -q -u user:pass -X MKCOL url/`                             |
 | 删除  | `curl -q -u user:pass -X DELETE url`                             |
 | 移动  | `curl -q -u user:pass -X MOVE -H "Destination: new_url" old_url` |
+## 1.4 请求
+### post 请求
+```
+curl -X POST -H "Content-Type: application/json" -d '{"n1":10,"n2":20}' http://127.0.0.1:5000/add
+```
+ 命令参数解释
+- `-X POST`：指定用 POST 方法
+- `-H "Content-Type: application/json"`：告诉服务器发的是 JSON
+- `-d "..."`：发送的 JSON 数据
+- `http://127.0.0.1:5000/add`：你的接口地址
+
 # aria2c
 ```shell
 # 原名保存到当前路目录下

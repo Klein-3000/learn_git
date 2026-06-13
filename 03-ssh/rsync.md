@@ -1,10 +1,12 @@
 # 参数 (parameter)
-- -avz
+- -avz[P]{progress, partial}
 - -exclude "*.txt"  一次一个匹配
 - ~~e ssh:与ssh结合(默认就是ssh)~~
 - -delete:删除
 - -n:试验
 - --progress:进步(度) | program:程序
+- --partial: 部分(断点续传)
+- --[b]ackup: 备份(默认删除目标目录的被修改文件;`-b`将被修改的文件加上 `~` 后缀)
 ## 注意`/` 问题
 ```shell
 # 无`/`

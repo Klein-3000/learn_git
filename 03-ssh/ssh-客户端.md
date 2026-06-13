@@ -23,8 +23,11 @@ Host <myserver>
 	# 建议配置
     # 有添加到ssh-add时，却不指定，ssh会逐个尝试
     IdentityFile /path/to/private/key
+    
+    # 禁用严格的主机密钥检查
+    StrictHostKeyChecking no
     # 自定义knwon_hosts 文件的路径
-    UserKnwonHostsFile /path/to/knownHosts
+    UserKnwonHostsFile [/path/to/knownHosts]{`/dev/null`: 不读取`~/.ssh/known_hosts` 文件}
     # 只使用[指定]{**IdentityFile**指定,或**ssh-add-L**列出的},忽略[标准私钥]{~/.ssh/id_rsa,~/.ssh/id_ecdsa}
     IdentitiesOnly yes
 ```
@@ -42,14 +45,17 @@ git clone git@github.com:User/repository
 ```
 # ssh (secure shell)
 ```shell
-ssh username@remote_host_ip
+ssh -o "StrictHostChecking=no" -o "UserKnownHostsKeyFile=/dev/null" username@remote_host_ip
 ```
 > [!note] password free login
 > ssh 默认是找`~/.ssh/id_rsa`、`id_ed25519` 等默认文件
 > 使用的是==非默认==的私钥（如 `id_ed25519_fedora`），==需要==**指定**它
 > eg
 > `ssh user@remote -i ~/.ssh/private_key`
-
+## 高级用法
+1. [[ssh-端口转发和链接代理#本地端口转发 -- LocalForward | 本地端口转发]]
+2. [[ssh-端口转发和链接代理#远程端口转发 -- RemoteForward| 远程端口转发]]
+3. [[ssh-端口转发和链接代理#链接代理 -- ProxyJump| 连接代理(跳板机)]]
 
 ---
 # ssh-keygen

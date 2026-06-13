@@ -3,7 +3,7 @@ language: golang
 type: tools
 function: 文件备份
 ---
-官网 : https://restic.net
+# 官网 : https://restic.net
 [restic 文档 — restic 0.18.1 文献](https://restic.readthedocs.io/en/stable/)
 
 
@@ -80,6 +80,10 @@ restic ls [-l]{查看详细信息} < latest | snapshots_id >
 
 # 恢复
 restic restore < latest | snapshots_id > --target /path/to/[dst]{一般不写dst}
+## 恢复指定文件
+restic restore < latest | snapshots_id > --target /path/to/[dst]{一般不写dst} --include-file=include.txt
+## include.txt 的创建
+restic diff <old> <new> | rg ["^-"]{恢复被删除的文件} |sed "s/-[[:space:]]*" > include.txt
 
 备份时 D:\src
 还原是 
@@ -88,8 +92,9 @@ restic restore < latest | snapshots_id > --target /path/to/[dst]{一般不写dst
 	   
 ```
 >[!attention] 注意
->`--target` 指定路径**不存**在时,自动**递归**创建`
->`--exclude-xattr 'security.selinux'` : 在有 selinux 的 linux 上恢复时使用
+>1. `--target` 指定路径**不存**在时,自动**递归**创建`
+>2. `--exclude-xattr 'security.selinux'` : 在有 selinux 的 linux 上恢复时使用
+>3. `--include-file` 
 ## 4.3 dump
 它与 `restore` 的核心区别在于：
 

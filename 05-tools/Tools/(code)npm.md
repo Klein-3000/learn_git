@@ -1,5 +1,8 @@
 # 基础命令
 ```shell
+# 换源
+npm config set registry https://registry.npmjs.org/
+
 # 下载 Install,未指定时,依据package.json文件下载
 npm install [package]
 
