@@ -12,8 +12,14 @@ C:\Users\Lenovo\AppData\Local\wsl\{d754f725-1bbd-492a-aed5-acbdda938ac9}
 | wsl --export \<NAME> \<PATH>          | 备份\<NAME>的wslsystemc        |
 | wsl --import \<NAME> \<安装位置> \<压缩包位置> | 导入wslsystem                 |
 | wsl --shutdown                        | 关闭wsl中的linux                |
-| wsl --exec linuxcommand               | 执行linux的命令                  |
+| wsl --exec linuxcommand               | 执行linux的命令               |
+| wsl --unregister <NAME>               | 卸载                          |
 | exit                                  | 退出                          |
+
+```
+wsl --install --from-file <.wsl> --localtion <path> --name <name>
+```
+https://mirror.pkgbuild.com/wsl/latest
 
 ## wsl中
 
