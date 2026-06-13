@@ -5,7 +5,8 @@
 docker compose up -d
 
 # 删除
-docker compose down
+# 默认只 清除容器和网络
+docker compose down [-v]{volume :彻底销毁环境 + 清空所有数据}
 
 # 启停
 docker compose < start | stop | restart > 
@@ -15,6 +16,23 @@ docker compose exec <service_name> [< cmd >]{如`/bin/bash`}
 
  
 ```
+
+### 对比
+```shell
+docker compose up [-d]
+docker compose run
+
+docker compose down
+docker compose rm 
+```
+
+| 命令       | 作用        |   启动？ | 删除容器？ | 删除网络？ | 用途      |
+| -------- | --------- | ----: | ----: | ----: | ------- |
+| **up**   | 启动所有服务    |     ✅ |     ❌ |     ❌ | 日常启动项目  |
+| **run**  | 临时运行单个容器  | ✅(临时) |     ❌ |     ❌ | 执行命令、调试 |
+| **down** | 停止 + 销毁环境 |     ❌ |     ✅ |     ✅ | 彻底关闭项目  |
+| **rm**   | 只删停止的容器   |     ❌ |     ✅ |     ❌ | 清理无用容器  |
+
 ## 注意
 Compose 会按以下规则生成容器名：
 ```shell

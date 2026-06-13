@@ -148,3 +148,43 @@ CMD
 
 ENTRYPOINT
 ```
+
+# 5. build 缓存管理
+
+## 5.1  每次 build 会产生缓存吗？
+
+**会，默认开启**
+
+- 每一行指令生成一层缓存
+- 文件 / 指令不变 → 直接复用缓存
+- 强制不缓存：`docker build --no-cache .`
+
+## 5.2  缓存在哪里？
+
+- 存在 **BuildKit 内部存储**
+- 不是普通文件，不是镜像
+- Linux：`/var/lib/docker/buildkit/`
+- Mac/Win：Docker Desktop 虚拟机内
+
+## 5.3 缓存查看 / 清理（正确命令）
+
+```
+# 查看缓存占用
+docker buildx du
+
+# 安全清理：只删悬空无用缓存
+docker builder prune
+docker buildx prune
+
+# 彻底清理：删除所有可回收缓存（下次构建变慢）
+docker builder prune -a -f [--verbose]
+docker buildx prune -a -f [--verbose]
+```
+
+| 命令                        | 作用           | 安全吗？           |
+| ------------------------- | ------------ | -------------- |
+| `docker builder du`       | 查看缓存占用       | -              |
+| `docker builder prune`    | 只删**悬空无用缓存** | ✅ 非常安全         |
+| `docker builder prune -a` | 删**所有可回收缓存** | ✅ 安全（只是下次构建变慢） |
+
+

@@ -175,13 +175,13 @@ docker rm [ -f ]container_name
 - 镜像是静态模板，容器是镜像的运行实例。
 - 只要还有容器存在（即使已停止），Docker 就会保留它所依赖的镜像。
 - 使用 `docker system prune` 可以清理无用资源（停止的容器、悬空镜像等），但不会删除有标签的镜像或仍在使用的资源。
-## 5. 日志和容器信息和
+## 5. 日志和容器信息
 ```bash
  # 日志logs
  docker logs [ -ft | --follow --timestamp] container_name_or_id
 
 # 容器信息
-docker inspect container_name_or_id
+docker inspect [-f | --format <json> ] container_name_or_id
 
 ```
 ### inspect
@@ -206,6 +206,29 @@ docker inspect --type=network mynet
 # inspect 卷
 docker inspect --type=volume myvol
 ```
+### inspect 常用命令总结
+
+| 命令                                                                           | 说明                           |
+| ---------------------------------------------------------------------------- | ---------------------------- |
+| `docker inspect -f {{.NetworkSettings.IPAddress}} <容器ID或名称>`                 | 获取**容器**的==ip地址==            |
+| `dockers inspect -f '{{range .Config.Env}}{{.}}{{println}}{{end}} <容器ID或名称>` | 获取**容器**设置的环境变量              |
+| `docker inspect --format='{{json .Config.Env}}' <容器ID或名称>`                   | 以==JSON格式==输出**容器**内的所有环境变量。 |
+| `docker inspect --format='{{.Config.Entrypoint}}' <容器ID或名称>`                 | 显示**容器**启动时执行的入口命令。          |
+| `docker inspect --format='{{.Config.Cmd}}' <容器ID或名称>`                        | 显示**容器**启动时执行的默认命令参数。        |
+| `docker volume inspect -f {{.Mounts}} <volume_id>`                           | 获取**数据卷**的==挂载位置==           |
+### 命令解析
+```
+dockers inspect -f '{{range .Config.Env}}{{.}}{{println}}{{end}} <容器ID或名称>
+```
+1. **`docker inspect`**: Docker 的核心命令，用于获取 Docker 对象（如容器、镜像、网络、卷等）的底层信息。它会返回一个包含对象所有详细配置和状态的 JSON 对象。
+2. **`-f '{{...}}'` (或 `--format`)`: 这个选项允许你使用 Go 模板语言来格式化` docker inspect` 的输出。引号中的内容就是模板。
+3. **`{{range .Config.Env}} ... {{end}}`**: 这是 Go 模板语法中的循环结构。
+    - **`.Config.Env`**: 这是 JSON 对象中的一个路径，指向一个数组（切片），其中包含了容器启动时被设置的所有环境变量。每个环境变量通常是一个形如 `"KEY=VALUE"` 的字符串。
+    - **`{{range ...}}`**: 表示对 `.Config.Env` 数组中的每一个元素（即每一个环境变量）进行迭代。
+    - **`{{end}}`**: 标记 `range` 循环的结束。
+4. **`{{.}}`**: 在 `range` 循环内部，`.` 代表当前正在迭代的元素，也就是数组中的一个环境变量字符串（例如 `"PATH=/usr/local/bin"`）。`{{.}}` 的作用是将这个当前元素的值打印出来。
+5. **`{{println}}`**: 这是 Go 模板中的一个函数，它的作用是打印一个换行符（并可能打印一个空格，但通常效果是换行）。这确保了每个环境变量都会在新的一行显示。
+
 
 ## 6. save and load
 ```bash
